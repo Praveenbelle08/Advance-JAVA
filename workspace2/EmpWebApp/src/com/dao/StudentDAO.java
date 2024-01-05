@@ -1,0 +1,53 @@
+package com.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.db.DbConnection;
+import com.dto.Student;
+
+public class StudentDAO {
+
+    public Student studentLogin(String email, String password) {
+        Connection connection = DbConnection.getConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        String loginQuery = "SELECT * FROM student WHERE email=? AND password=?";
+
+        try {
+            preparedStatement = connection.prepareStatement(loginQuery);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, password);
+            resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Student student = new Student();
+                student.setId(resultSet.getInt("id"));
+                student.setName(resultSet.getString("name"));
+                student.setAge(resultSet.getInt("age"));
+                student.setGender(resultSet.getString("gender"));
+                student.setAddress(resultSet.getString("address"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPassword(resultSet.getString("password"));
+                return student;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    resultSet.close();
+                    preparedStatement.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+}
+

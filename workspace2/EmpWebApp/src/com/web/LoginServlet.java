@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dao.EmployeeDAO;
+import com.dao.StudentDAO;
 import com.dto.Employee;
+import com.dto.Student;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -35,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 			} else {			
 				
 				
-				EmployeeDAO empDao = new EmployeeDAO();
+			EmployeeDAO empDao = new EmployeeDAO();
 				Employee emp = empDao.empLogin(emailId, password);
 				
 				if (emp != null) {
@@ -50,10 +52,25 @@ public class LoginServlet extends HttpServlet {
 					
 					RequestDispatcher rd = request.getRequestDispatcher("Login.html");
 					rd.include(request, response);
-				}
 				
+			
+//		            StudentDAO studentDao = new StudentDAO();
+//		            Student student = studentDao.studentLogin(emailId, password);
+
+//		            if (student != null) {
+//		                RequestDispatcher rd = request.getRequestDispatcher("StudentHomePage");
+//		                rd.forward(request, response);
+//		            } else {
+//		                out.println("<body bgcolor='lightyellow' text='red'>");
+//		                out.println("<center>");
+//		                out.println("<h1>Invalid Credentials</h1>");
+
+//		                RequestDispatcher rd = request.getRequestDispatcher("Login.html");
+//		                rd.include(request, response);
+		            }
+		        }
+
 				
-			}
 			out.println("</center>");
 			out.println("</body>");
 			out.println("</html>");

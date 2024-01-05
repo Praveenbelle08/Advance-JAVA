@@ -29,6 +29,10 @@ protected void doGet(HttpServletRequest request, HttpServletResponse response) t
 		
 		out.println("<center>");
 		out.println("<h1>Welcome to HRHomePage</h1>");
+		out.println("<h3>");
+		out.println("<a href=''>getAllEmp</a> &nbsp; &nbsp");
+		out.println("<a href=''>getEmpById</a>");
+		out.println("</h3>");
 		out.println("</center>");
 		out.println("</body>");
 	}
